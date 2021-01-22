@@ -1,5 +1,17 @@
 import React, { useState } from "react";
+import {
+  Navbar,
+  Nav,
+  NavDropdown,
+  Form,
+  FormControl,
+  Button,
+  Image,
+  Row,
+  Col,
+} from "react-bootstrap";
 export default Stopwatch;
+
 
 function Stopwatch() {
   const [second, setSecond] = useState(null);
@@ -9,17 +21,20 @@ function Stopwatch() {
   const [stage, setStage] = useState("reset");
   //clock elelment
   const clock = (
-    <p>
-      {(
-        "0" +
-        (second -
-          (second % 60) -
-          (+((second - (second % 60)) / 60) % 60) * 60) /
+    <>
+      <p>
+        {(
+          "0" +
+          (second -
+            (second % 60) -
+            (+((second - (second % 60)) / 60) % 60) * 60) /
           3600
-      ).slice(-2)}
+        ).slice(-2)}
       ::{("0" + (((second - (second % 60)) / 60) % 60)).slice(-2)}::
       {("0" + (second % 60)).slice(-2)}
-    </p>
+      </p>
+      <p>HH::MM::SS</p>
+    </>
   );
   //function which will handle start event
   let handlestart = () => {
@@ -45,28 +60,28 @@ function Stopwatch() {
   };
   //start element
   let start = (
-    <button type="button" onClick={handlestart}>
+    <Button variant="primary" style={{ backgroundColor: "#ff00bf", fontSize: "2.3rem" }} onClick={handlestart}>
       Start
-    </button>
+    </Button>
   );
 
   //pause element
   let resume = (
-    <button type="button" onClick={handlestart}>
+    <Button className="btn btn-info" style={{ backgroundColor: "green", fontSize: "2.5rem" }} onClick={handlestart}>
       Resume
-    </button>
+    </Button>
   );
 
   //reset element
   let reset = (
-    <button type="button" onClick={handlereset}>
+    <Button className="btn btn-danger" style={{ backgroundColor: "red", fontSize: "2.5rem", rightMargin: "5" }} onClick={handlereset}>
       Reset
-    </button>
+    </Button>
   );
   let pause = (
-    <button type="button" onClick={handlepause}>
+    <Button className="btn btn-primary" style={{ backgroundColor: "", fontSize: "2.5rem" }} onClick={handlepause}>
       Pause
-    </button>
+    </Button>
   );
   if (stage == "start") {
     return (
@@ -94,7 +109,7 @@ function Stopwatch() {
     } else {
       if (stage == "reset") {
         return (
-          <div>
+          <div className="container">
             <h6>STOPWATCH</h6>
             {clock}
 
